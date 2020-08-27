@@ -1,25 +1,33 @@
 package com.brunomusskopf.listaeventos.presentation.listaEventos.lista
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.brunomusskopf.listaeventos.R
 import com.brunomusskopf.listaeventos.databinding.ActivityListaEventosBinding
-import com.brunomusskopf.listaeventos.domain.listaEventos.model.Evento
+import com.brunomusskopf.listaeventos.presentation.listaEventos.detalhes.DetalhesEventoActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ListaEventosActivity : AppCompatActivity() {
+class ListaEventosActivity : AppCompatActivity(), ListaEventosAdapter.OnItemClickListener {
 
-    private val viewModel : ListaEventosViewModel by viewModel()
+    private val viewModel: ListaEventosViewModel by viewModel()
 
     private val adapter = ListaEventosAdapter()
-    private var binding : ActivityListaEventosBinding? = null
+    private var binding: ActivityListaEventosBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_lista_eventos)
-        binding!!.listaEventos.adapter = adapter
+
+        binding!!.listaEventos.apply {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(this@ListaEventosActivity)
+            adapter = this@ListaEventosActivity.adapter
+        }
+        adapter.onClickListener = this
     }
 
     override fun onStart() {
@@ -31,5 +39,11 @@ class ListaEventosActivity : AppCompatActivity() {
             }
             adapter.notifyDataSetChanged()
         })
+    }
+
+    override fun onItemClick(idEvento: Int?) {
+        val intent = Intent(this, DetalhesEventoActivity::class.java)
+        intent.putExtra(DetalhesEventoActivity.EXTRA_ID_EVENTO, idEvento)
+        startActivity(intent)
     }
 }
