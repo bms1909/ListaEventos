@@ -1,8 +1,8 @@
-package com.brunomusskopf.listaeventos.data.listaEventos.dataSource
+package com.brunomusskopf.listaeventos.domain.listaEventos.repository
 
 import com.brunomusskopf.listaeventos.domain.listaEventos.model.Evento
 
-interface EventosRemoteDataSourceI {
+interface EventosRepositoryI {
 
     suspend fun buscaEventos() : List<Evento>
 

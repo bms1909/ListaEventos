@@ -1,6 +1,6 @@
-package com.brunomusskopf.listaeventos.remote.listaEventos.model
+package com.brunomusskopf.listaeventos.domain.listaEventos.model
 
-class PessoaRemote(
+class Pessoa(
     val id: Int,
     val eventId: Int,
     val name: String,

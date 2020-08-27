@@ -1,7 +1,7 @@
-package com.brunomusskopf.listaeventos.remote.listaEventos.model
+package com.brunomusskopf.listaeventos.domain.listaEventos.model
 
-open class EventoRemote(
-    val people: List<PessoaRemote>,
+open class Evento(
+    val people: List<Pessoa>,
     val date: Long,
     val description: String,
     val image: String,
@@ -10,5 +10,5 @@ open class EventoRemote(
     val price: String,
     val title: String,
     val id: Int,
-    val cupons: List<CupomRemote>
+    val cupons: List<Cupom>
 )
