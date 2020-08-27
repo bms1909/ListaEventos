@@ -8,8 +8,8 @@ import com.brunomusskopf.listaeventos.domain.listaEventos.repository.EventosRepo
 class EventosRepositoryImpl(
     private val dataSourceRemote : EventosRemoteDataSourceI) : EventosRepositoryI {
 
-    override suspend fun buscaEventos(): List<Evento> = dataSourceRemote.buscaEventos()
+    override suspend fun buscaEventos(): List<Evento>? = dataSourceRemote.buscaEventos()
 
-    override suspend fun buscaEvento(id: Int): Evento = dataSourceRemote.buscaEvento(id)
+    override suspend fun buscaEvento(id: Int): Evento? = dataSourceRemote.buscaEvento(id)
 
 }

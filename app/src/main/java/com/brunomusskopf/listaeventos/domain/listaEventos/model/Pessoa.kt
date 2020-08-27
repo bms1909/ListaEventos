@@ -1,8 +1,11 @@
 package com.brunomusskopf.listaeventos.domain.listaEventos.model
 
-class Pessoa(
-    val id: Int,
-    val eventId: Int,
-    val name: String,
-    val picture: String
-)
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+class Pessoa {
+    var id: Int? = null
+    var eventId: Int? = null
+    var name: String? = null
+    var picture: String? = null
+}

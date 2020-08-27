@@ -1,7 +1,10 @@
 package com.brunomusskopf.listaeventos.domain.listaEventos.model
 
-class Cupom (
-    val id: Int,
-    val eventId: Int,
-    val discount: String
-)
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+class Cupom {
+    var id: Int? = null
+    var eventId: Int? = null
+    var discount: String? = null
+}

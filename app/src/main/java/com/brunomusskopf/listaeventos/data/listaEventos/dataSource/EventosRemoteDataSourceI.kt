@@ -4,8 +4,8 @@ import com.brunomusskopf.listaeventos.domain.listaEventos.model.Evento
 
 interface EventosRemoteDataSourceI {
 
-    suspend fun buscaEventos() : List<Evento>
+    suspend fun buscaEventos() : List<Evento>?
 
-    suspend fun buscaEvento(id : Int) : Evento
+    suspend fun buscaEvento(id : Int) : Evento?
 
 }

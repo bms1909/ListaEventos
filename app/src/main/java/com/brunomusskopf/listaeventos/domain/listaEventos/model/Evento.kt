@@ -1,14 +1,17 @@
 package com.brunomusskopf.listaeventos.domain.listaEventos.model
 
-open class Evento(
-    val people: List<Pessoa>,
-    val date: Long,
-    val description: String,
-    val image: String,
-    val longitude: Double,
-    val latitude: Double,
-    val price: String,
-    val title: String,
-    val id: Int,
-    val cupons: List<Cupom>
-)
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+class Evento {
+    var people: List<Pessoa>? = null
+    var date: Long? = null
+    var description: String? = null
+    var image: String? = null
+    var longitude: Double? = null
+    var latitude: Double? = null
+    var price: String? = null
+    var title: String? = null
+    var id: Int? = null
+    var cupons: List<Cupom>? = null
+}
