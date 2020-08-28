@@ -11,11 +11,14 @@ import kotlinx.coroutines.launch
 class DetalhesEventoViewModel(private val useCase: BuscaEventosUseCase) : ViewModel() {
 
     val liveData: MutableLiveData<Evento?> = MutableLiveData()
+    val liveDataProgress : MutableLiveData<Boolean> = MutableLiveData()
 
     fun iniciaBuscaEvento(idEvento: Int) {
-        CoroutineScope(Dispatchers.Default).launch {
+        CoroutineScope(Dispatchers.Main).launch {
+            liveDataProgress.value = true
             val evento = useCase.buscaEvento(idEvento)
-            liveData.postValue(evento)
+            liveData.value = evento
+            liveDataProgress.value = false
         }
     }
 }

@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import com.brunomusskopf.listaeventos.R
 import com.brunomusskopf.listaeventos.databinding.ActivityDetalhesEventoBinding
 import com.brunomusskopf.listaeventos.presentation.checkInEvento.CheckInEventoActivity
+import org.koin.android.ext.android.bind
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetalhesEventoActivity : AppCompatActivity() {
@@ -27,7 +28,7 @@ class DetalhesEventoActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_detalhes_evento)
         binding!!.btnCheckIn.setOnClickListener { onClickCheckIn() }
 
-        idEvento = intent.extras?.getInt(EXTRA_ID_EVENTO, -1)
+        idEvento = intent.extras!!.getInt(EXTRA_ID_EVENTO, -1)
         if (idEvento == -1) {
             throw Exception("Parâmetro EXTRA_ID_EVENTO não reconhecido")
         }
@@ -38,11 +39,24 @@ class DetalhesEventoActivity : AppCompatActivity() {
         viewModel.liveData.observe(this, Observer {
             binding!!.evento = it
         })
+        viewModel.liveDataProgress.observe(this, Observer {
+            processaStatusCarregamento(it)
+        })
     }
 
     override fun onResume() {
         super.onResume()
         viewModel.iniciaBuscaEvento(idEvento!!)
+    }
+
+    private fun processaStatusCarregamento(progressAtivo: Boolean) {
+        binding!!.apply {
+            if (progressAtivo) {
+                progressBar.show()
+            } else {
+                progressBar.hide()
+            }
+        }
     }
 
     private fun onClickCheckIn() {

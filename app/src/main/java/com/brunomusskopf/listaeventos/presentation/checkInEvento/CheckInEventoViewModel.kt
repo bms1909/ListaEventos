@@ -13,29 +13,30 @@ class CheckInEventoViewModel(private val useCase: CheckInEventoUseCase) : ViewMo
 
     val liveData: MutableLiveData<CheckInEventoRequest> = MutableLiveData()
     val liveDataErroStatus: MutableLiveData<CheckInEventoValidation?> = MutableLiveData()
-    //TODO aplicar em tela
     val liveDataProgress : MutableLiveData<Boolean> = MutableLiveData()
 
     fun tentaCheckIn() {
-        CoroutineScope(Dispatchers.Default).launch {
-            liveDataProgress.postValue(true)
+        CoroutineScope(Dispatchers.Main).launch {
+            //com escopo main e setValue, notificação a tela não depende de
+            // enfileiramento na main thread
+            liveDataProgress.value = true
 
             //liveData nulo neste ponto deve caracterizar uma exception
             val dadosTela = liveData.value!!
 
             val camposInvalidos = useCase.validaCampos(dadosTela)
             if (camposInvalidos != null) {
-                liveDataErroStatus.postValue(camposInvalidos)
-                liveDataProgress.postValue(false)
+                liveDataErroStatus.value = camposInvalidos
+                liveDataProgress.value = false
                 return@launch
             }
 
             val objeto = useCase.executaCheckInOuErro(dadosTela)
 
             if (objeto == null) {
-                liveDataErroStatus.postValue(null)
+                liveDataErroStatus.value = null
             }
-            liveDataProgress.postValue(false)
+            liveDataProgress.value = false
         }
     }
 }

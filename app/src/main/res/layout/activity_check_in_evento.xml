@@ -53,13 +53,28 @@
                 android:textAppearance="?android:attr/textAppearanceMedium" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <Button
-            android:id="@+id/btn_send"
+
+        <ViewSwitcher
+            android:id="@+id/vs_botao_progress"
+            android:animateLayoutChanges="true"
+            app:layout_constraintTop_toBottomOf="@id/et_email"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="@{ () -> viewModel.tentaCheckIn() }"
-            android:text="Confirmar Check-in"
-            app:layout_constraintTop_toBottomOf="@id/et_email" />
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btn_send"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="@{ () -> viewModel.tentaCheckIn() }"
+                android:text="Confirmar Check-in" />
+
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:indeterminate="true"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+        </ViewSwitcher>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

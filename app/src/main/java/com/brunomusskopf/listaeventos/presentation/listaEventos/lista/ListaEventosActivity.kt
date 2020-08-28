@@ -52,18 +52,21 @@ class ListaEventosActivity : AppCompatActivity(), ListaEventosAdapter.OnItemClic
     }
 
     private fun processaExistenciaLista(emErro: Boolean) {
-        binding!!.vsEmptyView.displayedChild = if (adapter.itens.isEmpty() || emErro )  0 else 1
-        binding!!.tvEmptyView.text = if(emErro) "Erro ao carregar" else "Nenhum evento encontrado"
+        binding!!.apply {
+            vsEmptyView.displayedChild = if (adapter.itens.isEmpty() || emErro )  0 else 1
+            tvEmptyView.text = if(emErro) "Erro ao carregar" else "Nenhum evento encontrado"
+        }
     }
 
     private fun processaStatusCarregamento(progressAtivo: Boolean) {
-        if (progressAtivo) {
-            binding!!.progressBar.show()
-        } else {
-            binding!!.progressBar.hide()
+        binding!!.apply {
+            if (progressAtivo) {
+                progressBar.show()
+            } else {
+                progressBar.hide()
+            }
+            tvEmptyView.text = "Carregando..."
         }
-
-        binding!!.tvEmptyView.text = "Carregando..."
     }
 
     override fun onItemClick(idEvento: Int?) {

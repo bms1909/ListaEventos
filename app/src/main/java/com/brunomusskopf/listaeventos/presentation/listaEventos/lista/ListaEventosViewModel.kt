@@ -14,11 +14,11 @@ class ListaEventosViewModel(private val useCase: BuscaEventosUseCase) : ViewMode
     val liveDataProgress : MutableLiveData<Boolean> = MutableLiveData()
 
     fun iniciaBuscaEventos() {
-        CoroutineScope(Dispatchers.Default).launch {
-            liveDataProgress.postValue(true)
+        CoroutineScope(Dispatchers.Main).launch {
+            liveDataProgress.value = true
             val eventos = useCase.buscaEventos()
-            liveData.postValue(eventos)
-            liveDataProgress.postValue(false)
+            liveData.value = eventos
+            liveDataProgress.value = false
         }
     }
 }

@@ -42,6 +42,17 @@ class CheckInEventoActivity : AppCompatActivity() {
         viewModel.liveDataErroStatus.observe(this, Observer{
             processaRetornoCheckIn(it)
         })
+        viewModel.liveDataProgress.observe(this, Observer {
+            processaStatusCarregamento(it)
+        })
+    }
+
+    private fun processaStatusCarregamento(progressAtivo: Boolean) {
+        binding!!.apply {
+            vsBotaoProgress.displayedChild = if (progressAtivo) 1 else 0
+            etNome.isEnabled = !progressAtivo
+            etEmail.isEnabled = !progressAtivo
+        }
     }
 
     private fun processaRetornoCheckIn(errosValidacao: CheckInEventoValidation?) {
