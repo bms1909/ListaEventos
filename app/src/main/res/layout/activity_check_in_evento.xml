@@ -18,6 +18,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/et_nome"
+            app:custom_binding_hint_error="@{viewModel.liveDataErroStatus.nameStatus}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent">
@@ -36,6 +37,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/et_email"
+            app:custom_binding_hint_error="@{viewModel.liveDataErroStatus.emailStatus}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/et_nome">

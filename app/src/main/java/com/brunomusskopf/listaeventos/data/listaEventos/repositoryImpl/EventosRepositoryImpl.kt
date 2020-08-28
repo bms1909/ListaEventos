@@ -8,6 +8,8 @@ import com.brunomusskopf.listaeventos.domain.listaEventos.repository.EventosRepo
 class EventosRepositoryImpl(
     private val dataSourceRemote : EventosRemoteDataSourceI) : EventosRepositoryI {
 
+    //Desta maneira, a implementação de uma origem de dados alternativa (como um cache)
+    //é muito facilitada
     override suspend fun buscaEventos(): List<Evento>? = dataSourceRemote.buscaEventos()
 
     override suspend fun buscaEvento(id: Int): Evento? = dataSourceRemote.buscaEvento(id)
