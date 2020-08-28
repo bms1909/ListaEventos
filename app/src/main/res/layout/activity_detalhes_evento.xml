@@ -15,10 +15,45 @@
         tools:context=".presentation.listaEventos.detalhes.DetalhesEventoActivity">
 
         <TextView
-            android:id="@+id/tv_id"
+            android:id="@+id/tv_title"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="wrap_content"
+            android:text="@{evento.title}"
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/tv_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{evento.description}"
+            app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+        <TextView
+            android:id="@+id/tv_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{evento.image}"
+            app:layout_constraintTop_toBottomOf="@id/tv_description" />
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="@{evento.date.toString()}"
+            app:layout_constraintTop_toBottomOf="@id/tv_image" />
+
+        <TextView
+            android:id="@+id/tv_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{evento.price}"
+            app:layout_constraintTop_toBottomOf="@id/tv_date" />
+
+
+        <!--        TODO var longitude: Double? = null-->
+        <!--        var latitude: Double? = null-->
+        <!--        var people: List<Pessoa>? = null-->
+        <!--        var cupons: List<Cupom>? = null-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

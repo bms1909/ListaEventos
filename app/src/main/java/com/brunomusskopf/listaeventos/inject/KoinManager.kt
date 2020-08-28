@@ -4,6 +4,7 @@ import com.brunomusskopf.listaeventos.data.listaEventos.dataSource.EventosRemote
 import com.brunomusskopf.listaeventos.data.listaEventos.repositoryImpl.EventosRepositoryImpl
 import com.brunomusskopf.listaeventos.domain.listaEventos.interactor.BuscaEventosUseCase
 import com.brunomusskopf.listaeventos.domain.listaEventos.repository.EventosRepositoryI
+import com.brunomusskopf.listaeventos.presentation.listaEventos.detalhes.DetalhesEventoViewModel
 import com.brunomusskopf.listaeventos.presentation.listaEventos.lista.ListaEventosViewModel
 import com.brunomusskopf.listaeventos.remote.listaEventos.dataSourceImpl.EventosRemoteDataSourceImpl
 import com.brunomusskopf.listaeventos.remote.listaEventos.service.EventosApi
@@ -43,6 +44,7 @@ object KoinManager {
 
     fun getModuloListaEventosPresentation() = module {
         viewModel { ListaEventosViewModel(get()) }
+        viewModel { DetalhesEventoViewModel(get()) }
     }
 }
 
