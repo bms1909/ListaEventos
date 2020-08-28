@@ -1,6 +1,6 @@
 package com.brunomusskopf.listaeventos.domain.checkInEvento.interactor
 
-import com.brunomusskopf.listaeventos.domain.base.ValidacaoStringModel
+import com.brunomusskopf.listaeventos.domain.base.StatusValidacaoString
 import com.brunomusskopf.listaeventos.domain.checkInEvento.model.CheckInEventoRequest
 import com.brunomusskopf.listaeventos.domain.checkInEvento.model.CheckInEventoValidation
 import com.brunomusskopf.listaeventos.domain.checkInEvento.repository.CheckInEventoRepositoryI
@@ -11,17 +11,17 @@ class CheckInEventoUseCase(private val repository: CheckInEventoRepositoryI) {
      * @return se válido retorna nulo, se inválido retorna objeto com detalhes do erro de cada campo
      */
     fun validaCampos(request: CheckInEventoRequest): CheckInEventoValidation? {
-        var nameValidation : ValidacaoStringModel? = null
-        var emailValidation : ValidacaoStringModel? = null
+        var nameValidation : StatusValidacaoString? = null
+        var emailValidation : StatusValidacaoString? = null
 
         if (request.name.isNullOrBlank()) {
-            nameValidation = ValidacaoStringModel.VAZIO
+            nameValidation = StatusValidacaoString.VAZIO
         } else if (request.name!!.length < 3) {
-            nameValidation = ValidacaoStringModel.INVALIDO
+            nameValidation = StatusValidacaoString.INVALIDO
         }
 
         if (request.email.isNullOrBlank()) {
-            emailValidation = ValidacaoStringModel.VAZIO
+            emailValidation = StatusValidacaoString.VAZIO
         }
         //TODO aprimorar validação de email
 

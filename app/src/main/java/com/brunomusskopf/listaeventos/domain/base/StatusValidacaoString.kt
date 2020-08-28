@@ -1,6 +1,6 @@
 package com.brunomusskopf.listaeventos.domain.base
 
-enum class ValidacaoStringModel {
+enum class StatusValidacaoString {
     INVALIDO,
     VAZIO
 }

@@ -9,6 +9,6 @@ import retrofit2.http.POST
 interface CheckInApi {
 
     @POST("checkin")
-    fun checkin(@Body request: CheckInEventoRequest): Call<CheckInEventoResponse>
+    fun checkin(@Body request: CheckInEventoRequest): Call<CheckInEventoResponse?>
 
 }

@@ -8,8 +8,8 @@ import retrofit2.http.Path
 interface EventosApi {
 
     @GET("events")
-    fun getEventos() : Call<List<Evento>>
+    fun getEventos() : Call<List<Evento>?>
 
     @GET("events/{id}")
-    fun getEvento(@Path("id") id: Int) : Call<Evento>
+    fun getEvento(@Path("id") id: Int) : Call<Evento?>
 }

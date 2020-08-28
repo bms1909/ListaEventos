@@ -34,11 +34,36 @@ class ListaEventosActivity : AppCompatActivity(), ListaEventosAdapter.OnItemClic
         super.onStart()
         viewModel.liveData.observe(this, Observer {
             adapter.itens.clear()
-            if (it != null) {
+            if (it != null ) {
                 adapter.itens.addAll(it)
             }
+            //TODO verificar retorno nunca nulo
+            processaExistenciaLista(it == null)
             adapter.notifyDataSetChanged()
         })
+        viewModel.liveDataProgress.observe(this, Observer {
+            processaStatusCarregamento(it)
+        })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.iniciaBuscaEventos()
+    }
+
+    private fun processaExistenciaLista(emErro: Boolean) {
+        binding!!.vsEmptyView.displayedChild = if (adapter.itens.isEmpty() || emErro )  0 else 1
+        binding!!.tvEmptyView.text = if(emErro) "Erro ao carregar" else "Nenhum evento encontrado"
+    }
+
+    private fun processaStatusCarregamento(progressAtivo: Boolean) {
+        if (progressAtivo) {
+            binding!!.progressBar.show()
+        } else {
+            binding!!.progressBar.hide()
+        }
+
+        binding!!.tvEmptyView.text = "Carregando..."
     }
 
     override fun onItemClick(idEvento: Int?) {
