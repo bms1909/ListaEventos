@@ -55,5 +55,12 @@
         <!--        var people: List<Pessoa>? = null-->
         <!--        var cupons: List<Cupom>? = null-->
 
+        <Button
+            android:id="@+id/btn_check_in"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Check-in"
+            app:layout_constraintTop_toBottomOf="@id/tv_price" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
