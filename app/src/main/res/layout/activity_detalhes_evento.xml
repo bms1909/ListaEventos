@@ -134,10 +134,12 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tv_date" />
 
-
-                    <!--        TODO var longitude: Double? = null-->
-                    <!--        var latitude: Double? = null-->
-
+                    <Button
+                        android:id="@+id/btn_ir_mapa"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Ver no Mapa"
+                        app:layout_constraintTop_toBottomOf="@id/tv_price" />
 
                     <Button
                         android:id="@+id/btn_check_in"
@@ -145,7 +147,7 @@
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/colorAccent"
                         android:text="Check-in"
-                        app:layout_constraintTop_toBottomOf="@id/tv_price" />
+                        app:layout_constraintTop_toBottomOf="@id/btn_ir_mapa" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,6 +1,7 @@
 package com.brunomusskopf.listaeventos.presentation.listaEventos.detalhes
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
@@ -33,6 +34,7 @@ class DetalhesEventoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_detalhes_evento)
         binding!!.btnCheckIn.setOnClickListener { onClickCheckIn() }
+        binding!!.btnIrMapa.setOnClickListener { onClickMapa() }
 
         binding!!.apply {
             viewModel = this@DetalhesEventoActivity.viewModel
@@ -51,6 +53,11 @@ class DetalhesEventoActivity : AppCompatActivity() {
             processaLayoutStatusErro(it == null)
             if (it != null) {
                 processaEventoLiveData(it)
+            }
+            binding!!.btnCheckIn.visibility = if (it?.latitude == null || it.longitude == null) {
+                View.GONE
+            } else {
+                View.VISIBLE
             }
         })
         viewModel.liveDataProgress.observe(this, Observer {
@@ -90,6 +97,13 @@ class DetalhesEventoActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    private fun onClickMapa() {
+        val lat = viewModel.liveData.value!!.latitude
+        val lon = viewModel.liveData.value!!.longitude
+
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("geo: $lat,$lon"))
+        startActivity(intent)
+    }
 
     private fun processaEventoLiveData(evento: Evento) {
 

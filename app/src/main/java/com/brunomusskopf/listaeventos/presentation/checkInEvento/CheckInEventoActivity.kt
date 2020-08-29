@@ -61,7 +61,7 @@ class CheckInEventoActivity : AppCompatActivity() {
         }
         else if (errosValidacao.errorMessage!= null) {
             AlertDialog.Builder(this)
-                .setTitle("Falha de comunicação")
+                .setTitle("Falha no Check-In")
                 .setMessage(errosValidacao.errorMessage)
                 .setPositiveButton("OK", null)
                 .show()

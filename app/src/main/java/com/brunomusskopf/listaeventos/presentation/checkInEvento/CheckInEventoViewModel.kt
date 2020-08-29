@@ -31,11 +31,16 @@ class CheckInEventoViewModel(private val useCase: CheckInEventoUseCase) : ViewMo
                 return@launch
             }
 
-            val objeto = useCase.executaCheckInOuErro(dadosTela)
+            val mensagemErro = useCase.executaCheckInOuErro(dadosTela)
 
-            if (objeto == null) {
-                liveDataErroStatus.value = null
+            val objetoErro = if (mensagemErro == null) {
+                null
+            } else {
+                CheckInEventoValidation(null, null, mensagemErro)
             }
+
+            liveDataErroStatus.value = objetoErro
+
             liveDataProgress.value = false
         }
     }

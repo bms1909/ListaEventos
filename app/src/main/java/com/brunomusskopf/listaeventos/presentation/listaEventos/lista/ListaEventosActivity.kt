@@ -62,6 +62,7 @@ class ListaEventosActivity : AppCompatActivity(), ListaEventosAdapter.OnItemClic
         binding!!.apply {
             if (progressAtivo) {
                 tvEmptyView.text = "Carregando..."
+                vsEmptyView.displayedChild = 1
                 progressBar.show()
             } else {
                 progressBar.hide()
