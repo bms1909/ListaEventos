@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ListaEventos</string>
+    <string name="texto_desconto">%1s %%</string>
+
 </resources>
