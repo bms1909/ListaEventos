@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools">
+        android:layout_height="match_parent">
 
         <androidx.core.widget.ContentLoadingProgressBar
             android:id="@+id/progress_bar"
@@ -13,26 +13,29 @@
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
         <ViewSwitcher
             android:id="@+id/vs_empty_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:animateLayoutChanges="true"
             app:layout_constraintTop_toBottomOf="@id/progress_bar"
             app:layout_constraintBottom_toBottomOf="parent"
             tools:context=".presentation.listaEventos.lista.ListaEventosActivity">
 
-            <TextView
-                android:id="@+id/tv_empty_view"
-                android:text="Carregando..."
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/lista_eventos"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:id="@+id/tv_empty_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Carregando..."
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         </ViewSwitcher>
     </androidx.constraintlayout.widget.ConstraintLayout>

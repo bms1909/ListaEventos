@@ -48,9 +48,8 @@ class DetalhesEventoActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         viewModel.liveData.observe(this, Observer {
-            if (it == null) {
-                processaErroCarregamento()
-            } else {
+            processaLayoutStatusErro(it == null)
+            if (it != null) {
                 processaEventoLiveData(it)
             }
         })
@@ -64,17 +63,22 @@ class DetalhesEventoActivity : AppCompatActivity() {
         viewModel.iniciaBuscaEvento(idEvento!!)
     }
 
-    private fun processaErroCarregamento() {
-        //TODO
+    private fun processaLayoutStatusErro(emErro: Boolean) {
+        binding!!.apply {
+            vsEmptyView.displayedChild = if (emErro) 1 else 0
+            if (emErro) {
+                tvEmptyView.text = "Erro ao carregar"
+            }
+        }
     }
 
     private fun processaStatusCarregamento(progressAtivo: Boolean) {
         binding!!.apply {
             if (progressAtivo) {
-                btnCheckIn.visibility = View.GONE
+                tvEmptyView.text = "Carregando..."
                 progressBar.show()
+                vsEmptyView.displayedChild = 1
             } else {
-                btnCheckIn.visibility = View.VISIBLE
                 progressBar.hide()
             }
         }
@@ -89,19 +93,29 @@ class DetalhesEventoActivity : AppCompatActivity() {
 
     private fun processaEventoLiveData(evento: Evento) {
 
-        val binding = binding!!
+        val validBinding = binding!!
 
-        val imageView = binding.ivImage
+        val imageView = validBinding.ivImage
         Glide.with(this)
-            .load(evento?.image)
+            .load(evento.image)
             .override(imageView.width, imageView.height)
             //TODO .placeholder(R.drawable.)
             .into(imageView)
 
 
-        refazViewArrayItens(binding.llPeople, binding.tvPeople, evento.people, ::criaViewPeople )
+        refazViewArrayItens(
+            validBinding.llPeople,
+            validBinding.tvPeople,
+            evento.people,
+            ::criaViewPeople
+        )
 
-        refazViewArrayItens(binding.llCupons, binding.tvCupons, evento.cupons, ::criaViewCupom )
+        refazViewArrayItens(
+            validBinding.llCupons,
+            validBinding.tvCupons,
+            evento.cupons,
+            ::criaViewCupom
+        )
     }
 
     fun <T> refazViewArrayItens(linear : LinearLayout, titulo : TextView, lista : List<T>?, functionCreate : (T) -> View ) {
