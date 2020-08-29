@@ -12,9 +12,9 @@ import androidx.lifecycle.Observer
 import com.brunomusskopf.listaeventos.R
 import com.brunomusskopf.listaeventos.databinding.ActivityDetalhesEventoBinding
 import com.brunomusskopf.listaeventos.domain.listaEventos.model.Cupom
-import com.brunomusskopf.listaeventos.domain.listaEventos.model.Evento
 import com.brunomusskopf.listaeventos.domain.listaEventos.model.Pessoa
 import com.brunomusskopf.listaeventos.presentation.checkInEvento.CheckInEventoActivity
+import com.brunomusskopf.listaeventos.presentation.listaEventos.model.EventoView
 import com.bumptech.glide.Glide
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -105,7 +105,7 @@ class DetalhesEventoActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun processaEventoLiveData(evento: Evento) {
+    private fun processaEventoLiveData(evento: EventoView) {
 
         val validBinding = binding!!
 
@@ -113,9 +113,7 @@ class DetalhesEventoActivity : AppCompatActivity() {
         Glide.with(this)
             .load(evento.image)
             .override(imageView.width, imageView.height)
-            //TODO .placeholder(R.drawable.)
             .into(imageView)
-
 
         refazViewArrayItens(
             validBinding.llPeople,

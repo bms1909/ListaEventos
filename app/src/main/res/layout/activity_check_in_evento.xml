@@ -63,9 +63,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_send"
-                android:background="@color/colorAccent"
+                app:backgroundTint="@color/colorAccent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="@{ () -> viewModel.tentaCheckIn() }"

@@ -37,7 +37,6 @@ class ListaEventosActivity : AppCompatActivity(), ListaEventosAdapter.OnItemClic
             if (it != null ) {
                 adapter.itens.addAll(it)
             }
-            //TODO verificar retorno nunca nulo
             processaExistenciaLista(it == null)
             adapter.notifyDataSetChanged()
         })

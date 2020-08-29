@@ -7,7 +7,7 @@
 
         <variable
             name="evento"
-            type="com.brunomusskopf.listaeventos.domain.listaEventos.model.Evento" />
+            type="com.brunomusskopf.listaeventos.presentation.listaEventos.model.EventoView" />
     </data>
 
 
