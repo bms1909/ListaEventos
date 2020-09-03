@@ -11,25 +11,30 @@ import java.util.concurrent.TimeUnit
 
 object RetrofitBaseUtils {
 
-    fun criarRetrofitPadrao() = Retrofit
+    fun createDefaultRetrofit() = Retrofit
         .Builder()
         .baseUrl("https://5b840ba5db24a100142dcd8c.mockapi.io/api/")
         .client(
             OkHttpClient.Builder()
-            .readTimeout(30, TimeUnit.SECONDS)
-            .writeTimeout(30, TimeUnit.SECONDS)
-            .connectTimeout(30, TimeUnit.SECONDS).build()
+            .readTimeout(5, TimeUnit.SECONDS)
+            .writeTimeout(5, TimeUnit.SECONDS)
+            .connectTimeout(5, TimeUnit.SECONDS).build()
         )
         .addConverterFactory(JacksonConverterFactory.create())
         .build()
 
 
-    suspend fun <T> executaCall(call: Call<T>): T? =
+    suspend fun <T> executeCall(call: Call<T>): T? =
         withContext(Dispatchers.IO) {
             try {
-                call.execute().body()
+                val callResult = call.execute()
+                var result : T? = null
+                if (callResult.isSuccessful) {
+                    result = callResult.body()
+                }
+                result
             } catch (e: Exception) {
-                Log.e("BMS", "Erro na comunicação com a API", e)
+                Log.e("BMS", "Erro na comunicação com a API. ${e.message}", e)
                 null
             }
         }

@@ -1,6 +1,5 @@
 package com.brunomusskopf.listaeventos
 
-import android.app.Application
 import androidx.multidex.MultiDexApplication
 import com.brunomusskopf.listaeventos.inject.KoinManager
 import org.koin.android.ext.koin.androidContext

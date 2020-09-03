@@ -1,7 +1,7 @@
 package com.brunomusskopf.listaeventos.presentation.base
 
 import androidx.databinding.BindingAdapter
-import com.brunomusskopf.listaeventos.domain.base.StatusValidacaoString
+import com.brunomusskopf.listaeventos.domain.base.StringValidationStatus
 import com.google.android.material.textfield.TextInputLayout
 
 object DataBindingAdapters {
@@ -11,12 +11,12 @@ object DataBindingAdapters {
      */
     @BindingAdapter("custom_binding_hint_error")
     @JvmStatic
-    fun textInputLayoutErrorBindingAdapter(et: TextInputLayout, codigo: StatusValidacaoString?) {
-        when (codigo) {
-            StatusValidacaoString.VAZIO -> {
+    fun textInputLayoutErrorBindingAdapter(et: TextInputLayout, code: StringValidationStatus?) {
+        when (code) {
+            StringValidationStatus.EMPTY -> {
                 et.error = "Campo Obrigatório"
             }
-            StatusValidacaoString.INVALIDO -> {
+            StringValidationStatus.INVALID -> {
                 et.error ="Campo inválido"
             }
             else -> {
