@@ -20,22 +20,22 @@ object CheckInEventKoinModule {
         getModuleCheckInEventPresentation()
     )
 
-    private fun getModuleCheckInEventRemote() = module {
+    fun getModuleCheckInEventRemote() = module {
         factory<CheckInApi> {
             CheckInApiRetrofitServiceFactory.createRetrofitService()
         }
         factory<CheckInRemoteDataSourceI> { CheckInRemoteDataSourceImpl(get()) }
     }
 
-    private fun getModuleCheckInEventData() = module {
+    fun getModuleCheckInEventData() = module {
         factory<CheckInEventRepositoryI> { CheckInEventRepositoryImpl(get()) }
     }
 
-    private fun getModuleCheckInEventDomain() = module {
+    fun getModuleCheckInEventDomain() = module {
         factory { CheckInEventUseCase(get()) }
     }
 
-    private fun getModuleCheckInEventPresentation() = module {
+    fun getModuleCheckInEventPresentation() = module {
         viewModel { CheckInEventViewModel(get()) }
     }
 

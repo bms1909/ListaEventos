@@ -8,6 +8,7 @@ import com.brunomusskopf.listaeventos.R
 import com.brunomusskopf.listaeventos.databinding.ActivityCheckInEventBinding
 import com.brunomusskopf.listaeventos.domain.checkInEvent.model.CheckInEventRequest
 import com.brunomusskopf.listaeventos.domain.checkInEvent.model.CheckInEventValidation
+import com.brunomusskopf.listaeventos.presentation.listEvents.details.EventDetailActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CheckInEventActivity : AppCompatActivity() {
@@ -33,7 +34,14 @@ class CheckInEventActivity : AppCompatActivity() {
             lifecycleOwner = this@CheckInEventActivity
         }
 
-        viewModel.liveData.value = CheckInEventRequest()
+        val eventId = intent.extras!!.getInt(EventDetailActivity.EXTRA_EVENT_ID, -1)
+        if (eventId == -1) {
+            throw Exception("Parâmetro EXTRA_ID_EVENTO não reconhecido")
+        }
+        val liveDataRequest = CheckInEventRequest()
+        liveDataRequest.eventId = eventId
+
+        viewModel.liveData.value = liveDataRequest
     }
 
     override fun onStart() {

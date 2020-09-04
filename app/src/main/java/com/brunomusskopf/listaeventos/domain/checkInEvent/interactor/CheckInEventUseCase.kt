@@ -11,6 +11,12 @@ class CheckInEventUseCase(private val repository: CheckInEventRepositoryI) {
      * @return se válido retorna nulo, se inválido retorna objeto com detalhes do erro de cada campo
      */
     fun validateFields(request: CheckInEventRequest): CheckInEventValidation? {
+        val errorId = if (request.eventId == null) {
+            "Erro interno"
+        } else {
+            null
+        }
+
         var nameValidation: StringValidationStatus? = null
         var emailValidation: StringValidationStatus? = null
 
@@ -29,8 +35,8 @@ class CheckInEventUseCase(private val repository: CheckInEventRepositoryI) {
             emailValidation = StringValidationStatus.INVALID
         }
 
-        if (nameValidation != null || emailValidation != null) {
-            return CheckInEventValidation(nameValidation, emailValidation, null)
+        if (nameValidation != null || emailValidation != null || errorId != null) {
+            return CheckInEventValidation(nameValidation, emailValidation, errorId)
         }
 
         return null

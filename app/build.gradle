@@ -44,7 +44,7 @@ dependencies {
 
     //region Presentation
     implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'com.google.android.material:material:1.2.0'
+    implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation "com.github.bumptech.glide:glide:4.11.0"
 
@@ -55,7 +55,6 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-jackson:$retrofit_version"
     implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
-
     //endregion
 
 
@@ -63,6 +62,7 @@ dependencies {
     ext.koin_version = "2.1.0"
     implementation "org.koin:koin-android:$koin_version"
     implementation "org.koin:koin-androidx-viewmodel:$koin_version"
+    testImplementation "org.koin:koin-test:${koin_version}"
     //endregion
 
     //region Coroutines
